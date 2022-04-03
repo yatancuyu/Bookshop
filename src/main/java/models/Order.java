@@ -1,10 +1,18 @@
 package models;
 
+import lombok.*;
+
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 @Table(name = "orders")
 public class Order {
     @Id
@@ -16,71 +24,14 @@ public class Order {
     private Customer customer;
     private double price;
     private String deliveryAddress;
-    private String datetimeOfDelivery;
+    private Date datetimeOfDelivery;
 
     @Enumerated(EnumType.ORDINAL)
     private Status status;
 
     @OneToMany(mappedBy = "order")
-    private Set<BookOrder> books = new HashSet<BookOrder>();
-
-    public Order() {}
-
-    public Order(Customer customer, double price, String deliveryAddress, String datetimeOfDelivery, Status status) {
-        this.customer = customer;
-        this.price = price;
-        this.deliveryAddress = deliveryAddress;
-        this.datetimeOfDelivery = datetimeOfDelivery;
-        this.status = status;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Set<BookOrder> getBooks() { return books; }
-
-    public void setBooks(Set<BookOrder> books) { this.books = books;}
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getDeliveryAddress() {
-        return deliveryAddress;
-    }
-
-    public void setDeliveryAddress(String deliveryAddress) {
-        this.deliveryAddress = deliveryAddress;
-    }
-
-    public String getDatetimeOfDelivery() {
-        return datetimeOfDelivery;
-    }
-
-    public void setDatetimeOfDelivery(String datetimeOfDelivery) {
-        this.datetimeOfDelivery = datetimeOfDelivery;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
+    @ToString.Exclude
+    private Set<BookOrder> books = new HashSet<>();
 
     public enum Status {
         OPEN,
@@ -89,16 +40,25 @@ public class Order {
         DELIVERED;
     }
 
+    public Order(Customer customer, double price, String deliveryAddress,
+                 Date datetimeOfDelivery, Status status) {
+        this.customer = customer;
+        this.price = price;
+        this.deliveryAddress = deliveryAddress;
+        this.datetimeOfDelivery = datetimeOfDelivery;
+        this.status = status;
+    }
+
     @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", customer=" + customer +
-                ", price=" + price +
-                ", deliveryAddress='" + deliveryAddress + '\'' +
-                ", datetimeOfDelivery='" + datetimeOfDelivery + '\'' +
-                ", status=" + status +
-                ", books=" + books +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Order)) return false;
+        Order order = (Order) o;
+        return id == order.id &&
+                Double.compare(order.price, price) == 0 &&
+                customer.getId() == order.customer.getId() &&
+                Objects.equals(deliveryAddress, order.deliveryAddress) &&
+                Objects.equals(datetimeOfDelivery, order.datetimeOfDelivery) &&
+                status == order.status;
     }
 }

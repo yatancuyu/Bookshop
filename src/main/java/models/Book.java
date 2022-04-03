@@ -1,10 +1,17 @@
 package models;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 @Table(name = "books")
 public class Book {
     @Id
@@ -21,12 +28,12 @@ public class Book {
     private double price;
 
     @OneToMany(mappedBy = "book")
-    private Set<BookOrder> orders = new HashSet<BookOrder>();
+    @ToString.Exclude
+    private Set<BookOrder> orders = new HashSet<>();
 
-    public Book () {}
-
-    public Book(String name, String authors, String genre, String publisher, int yearOfPublication, int numberOfPages,
-                String pathToCover, int amount, double price) {
+    public Book(String name, String authors, String genre, String publisher,
+                int yearOfPublication, int numberOfPages, String pathToCover,
+                int amount, double price) {
         this.name = name;
         this.authors = authors;
         this.genre = genre;
@@ -38,73 +45,19 @@ public class Book {
         this.price = price;
     }
 
-    public int getId() {
-        return id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book)) return false;
+        Book book = (Book) o;
+        return yearOfPublication == book.yearOfPublication &&
+                numberOfPages == book.numberOfPages &&
+                amount == book.amount &&
+                Double.compare(book.price, price) == 0 &&
+                Objects.equals(name, book.name) &&
+                Objects.equals(authors, book.authors) &&
+                Objects.equals(genre, book.genre) &&
+                Objects.equals(publisher, book.publisher) &&
+                Objects.equals(pathToCover, book.pathToCover);
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(String authors) {
-        this.authors = authors;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public int getYearOfPublication() {
-        return yearOfPublication;
-    }
-
-    public void setYearOfPublication(int yearOfPublication) {
-        this.yearOfPublication = yearOfPublication;
-    }
-
-    public int getNumberOfPages() {
-        return numberOfPages;
-    }
-
-    public void setNumberOfPages(int numberOfPages) {
-        this.numberOfPages = numberOfPages;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public int getAmount() { return amount; }
-
-    public Set<BookOrder> getOrders() { return orders; }
-
-    public void setAmount(int amount) { this.amount = amount; }
-
-    public String getPathToCover() { return pathToCover; }
-
-    public void setPathToCover(String pathToCover) { this.pathToCover = pathToCover; }
 }
