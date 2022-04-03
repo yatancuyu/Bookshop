@@ -1,6 +1,7 @@
 package utils;
 
 import models.Book;
+import models.BookOrder;
 import models.Customer;
 import models.Order;
 import org.hibernate.SessionFactory;
@@ -19,6 +20,7 @@ public class HibernateSessionFactoryUtil {
                 configuration.addAnnotatedClass(Book.class);
                 configuration.addAnnotatedClass(Customer.class);
                 configuration.addAnnotatedClass(Order.class);
+                configuration.addAnnotatedClass(BookOrder.class);
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());
 

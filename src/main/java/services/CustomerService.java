@@ -12,7 +12,7 @@ public class CustomerService {
         customersDao.create(customer);
     }
 
-    public void deleteCustomerForever(Customer customer) {
+    public void deleteCustomer(Customer customer) {
         customersDao.delete(customer);
     }
 

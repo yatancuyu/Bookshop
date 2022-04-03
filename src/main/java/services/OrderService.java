@@ -13,12 +13,8 @@ public class OrderService {
         ordersDao.create(order);
     }
 
-    public List<Order> readOrdersByCustomerId(Customer customer) {
-        return ordersDao.readOrdersById(customer);
-    }
-
-    public List<Order> readOrders() {
-        return ordersDao.readOrders();
+    public List<Order> readOrdersByCustomer(Customer customer) {
+        return ordersDao.readOrdersByCustomer(customer);
     }
 
     public void deleteOrder(Order order) {
