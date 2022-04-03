@@ -10,5 +10,4 @@ public interface OrderDao {
     void delete(Order order);
     Order readByID(int id);
     List<Order> readOrdersByCustomer(Customer customer);
-    List<Order> readOrders();
 }
