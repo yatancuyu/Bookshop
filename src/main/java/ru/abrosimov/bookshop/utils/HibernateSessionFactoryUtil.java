@@ -1,9 +1,9 @@
-package utils;
+package ru.abrosimov.bookshop.utils;
 
-import models.Book;
-import models.BookOrder;
-import models.Customer;
-import models.Order;
+import ru.abrosimov.bookshop.models.Book;
+import ru.abrosimov.bookshop.models.BookOrder;
+import ru.abrosimov.bookshop.models.Customer;
+import ru.abrosimov.bookshop.models.Order;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;

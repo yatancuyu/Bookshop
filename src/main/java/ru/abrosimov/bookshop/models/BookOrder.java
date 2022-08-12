@@ -1,4 +1,4 @@
-package models;
+package ru.abrosimov.bookshop.models;
 
 import lombok.*;
 import javax.persistence.*;

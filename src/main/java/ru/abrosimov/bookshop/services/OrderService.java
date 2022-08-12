@@ -1,9 +1,9 @@
-package services;
+package ru.abrosimov.bookshop.services;
 
-import dao.impl.OrderDaoImpl;
-import dao.OrderDao;
-import models.Customer;
-import models.Order;
+import ru.abrosimov.bookshop.dao.impl.OrderDaoImpl;
+import ru.abrosimov.bookshop.dao.OrderDao;
+import ru.abrosimov.bookshop.models.Customer;
+import ru.abrosimov.bookshop.models.Order;
 
 import java.util.List;
 

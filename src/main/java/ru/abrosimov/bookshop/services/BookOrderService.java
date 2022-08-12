@@ -1,11 +1,8 @@
-package services;
+package ru.abrosimov.bookshop.services;
 
-import dao.BookOrderDao;
-import dao.impl.BookOrderDaoImpl;
-import models.Book;
-import models.BookOrder;
-
-import java.util.List;
+import ru.abrosimov.bookshop.dao.BookOrderDao;
+import ru.abrosimov.bookshop.dao.impl.BookOrderDaoImpl;
+import ru.abrosimov.bookshop.models.BookOrder;
 
 public class BookOrderService {
     private BookOrderDao bookOrderDao = new BookOrderDaoImpl();

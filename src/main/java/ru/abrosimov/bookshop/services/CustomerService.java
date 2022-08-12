@@ -1,8 +1,8 @@
-package services;
+package ru.abrosimov.bookshop.services;
 
-import dao.CustomerDao;
-import dao.impl.CustomerDaoImpl;
-import models.Customer;
+import ru.abrosimov.bookshop.dao.CustomerDao;
+import ru.abrosimov.bookshop.dao.impl.CustomerDaoImpl;
+import ru.abrosimov.bookshop.models.Customer;
 
 import java.util.List;
 

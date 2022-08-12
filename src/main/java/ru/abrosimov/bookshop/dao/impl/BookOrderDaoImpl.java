@@ -1,59 +1,49 @@
-package dao.impl;
+package ru.abrosimov.bookshop.dao.impl;
 
-import dao.OrderDao;
-import models.Customer;
-import models.Order;
-import utils.HibernateSessionFactoryUtil;
+import ru.abrosimov.bookshop.dao.BookOrderDao;
+import ru.abrosimov.bookshop.models.BookOrder;
+import ru.abrosimov.bookshop.utils.HibernateSessionFactoryUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import java.util.List;
-
-public class OrderDaoImpl implements OrderDao {
+public class BookOrderDaoImpl implements BookOrderDao {
     @Override
-    public void create(Order order) {
+    public void create(BookOrder bookOrder) {
         try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction tx1 = session.beginTransaction();
-            session.save(order);
+            session.save(bookOrder);
             tx1.commit();
         }
     }
 
     @Override
-    public void update(Order order) {
+    public void update(BookOrder bookOrder) {
         try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction tx1 = session.beginTransaction();
-            session.update(order);
+            session.update(bookOrder);
             tx1.commit();
         }
     }
 
     @Override
-    public void delete(Order order) {
+    public void delete(BookOrder bookOrder) {
         try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction tx1 = session.beginTransaction();
-            session.delete(order);
+            session.delete(bookOrder);
             tx1.commit();
         }
     }
 
     @Override
-    public Order readByID(int id) {
+    public BookOrder readByID(int bookId, int orderId) {
         try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
-            return session.get(Order.class, id);
-        }
-    }
-
-    @Override
-    public List<Order> readOrdersByCustomer(Customer customer) {
-        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
-            Query<Order> query = session.createQuery("FROM Order WHERE customerId = :param", Order.class)
-                    .setParameter("param", customer.getId());
+            Query<BookOrder> query = session.createQuery("FROM BookOrder WHERE bookId = :param AND orderId = :param2", BookOrder.class)
+                    .setParameter("param", bookId).setParameter("param2", orderId);
             if (query.getResultList().size() == 0) {
                 return null;
             }
-            return query.getResultList();
+            return query.getResultList().get(0);
         }
     }
 }

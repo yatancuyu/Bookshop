@@ -1,6 +1,6 @@
-package dao;
+package ru.abrosimov.bookshop.dao;
 
-import models.Customer;
+import ru.abrosimov.bookshop.models.Customer;
 
 import java.util.List;
 

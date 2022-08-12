@@ -1,8 +1,8 @@
-package services;
+package ru.abrosimov.bookshop.services;
 
-import dao.BookDao;
-import dao.impl.BookDaoImpl;
-import models.Book;
+import ru.abrosimov.bookshop.dao.BookDao;
+import ru.abrosimov.bookshop.dao.impl.BookDaoImpl;
+import ru.abrosimov.bookshop.models.Book;
 
 import java.util.List;
 public class BookService {

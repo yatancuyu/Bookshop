@@ -1,15 +1,13 @@
-package dao.impl;
+package ru.abrosimov.bookshop.dao.impl;
 
-import dao.BookDao;
-import models.Book;
-import models.BookOrder;
-import utils.HibernateSessionFactoryUtil;
+import ru.abrosimov.bookshop.dao.BookDao;
+import ru.abrosimov.bookshop.models.Book;
+import ru.abrosimov.bookshop.utils.HibernateSessionFactoryUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.List;
-import java.util.Set;
 
 public class BookDaoImpl implements BookDao {
 

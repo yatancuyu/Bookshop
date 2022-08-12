@@ -1,7 +1,7 @@
-package services;
+package ru.abrosimov.bookshop.services;
 
-import models.Customer;
-import models.Order;
+import ru.abrosimov.bookshop.models.Customer;
+import ru.abrosimov.bookshop.models.Order;
 import org.junit.Assert;
 import org.junit.Test;
 

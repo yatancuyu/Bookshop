@@ -1,6 +1,6 @@
-package dao;
+package ru.abrosimov.bookshop.dao;
 
-import models.BookOrder;
+import ru.abrosimov.bookshop.models.BookOrder;
 
 
 public interface BookOrderDao {
