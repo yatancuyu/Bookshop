@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @ToString
 @Table(name = "orders")
-public class Order {
+public class Order implements GenericEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -31,7 +31,7 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     @ToString.Exclude
-    private Set<BookOrder> books = new HashSet<>();
+    private Set<BookOrderEntity> books = new HashSet<>();
 
     public enum Status {
         OPEN,

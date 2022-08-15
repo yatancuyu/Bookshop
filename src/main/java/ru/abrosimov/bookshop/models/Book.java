@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @ToString
 @Table(name = "books")
-public class Book {
+public class Book implements GenericEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -29,7 +29,7 @@ public class Book {
 
     @OneToMany(mappedBy = "book")
     @ToString.Exclude
-    private Set<BookOrder> orders = new HashSet<>();
+    private Set<BookOrderEntity> orders = new HashSet<>();
 
     public Book(String name, String authors, String genre, String publisher,
                 int yearOfPublication, int numberOfPages, String pathToCover,

@@ -11,8 +11,12 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "books_in_orders")
-public class BookOrder implements Serializable {
+public class BookOrderEntity implements GenericEntity, Serializable {
+
     @Id
+    @GeneratedValue
+    private int id;
+
     @ManyToOne
     @JoinColumn(name = "bookid", referencedColumnName = "id")
     private Book book;
@@ -27,8 +31,8 @@ public class BookOrder implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof BookOrder)) return false;
-        BookOrder bookOrder = (BookOrder) o;
+        if (!(o instanceof BookOrderEntity)) return false;
+        BookOrderEntity bookOrder = (BookOrderEntity) o;
         return amount == bookOrder.amount &&
                 order.getId() == bookOrder.order.getId() &&
                 book.getId() == bookOrder.book.getId();

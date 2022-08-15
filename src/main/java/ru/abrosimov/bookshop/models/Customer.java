@@ -9,7 +9,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @Table(name = "customers")
-public class Customer {
+public class Customer implements GenericEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
