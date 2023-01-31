@@ -18,7 +18,7 @@ import ru.abrosimov.bookshop.models.GenericEntity;
 import java.util.Collection;
 import java.util.Optional;
 
-public class GenericDaoImpl<T extends GenericEntity> implements GenericDAO<T> {
+public class GenericDAOImpl<T extends GenericEntity> implements GenericDAO<T> {
 
     protected SessionFactory sessionFactory;
     private final Class<T> typeT = ReflectionMagic.getGeneric(getClass(), 0);
