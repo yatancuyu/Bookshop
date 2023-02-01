@@ -16,7 +16,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@Table(name = "customers")
+@Table(name = "customers", uniqueConstraints={@UniqueConstraint(columnNames = {"email" , "login"})})
 public class Customer implements GenericEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

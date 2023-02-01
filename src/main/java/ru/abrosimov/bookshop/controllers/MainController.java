@@ -14,8 +14,8 @@ import java.util.Optional;
 @Controller
 public class MainController {
 
-    private final BookDAO bookDAO;
-    private final CustomerDAO customerDAO;
+    protected BookDAO bookDAO;
+    protected CustomerDAO customerDAO;
 
     @Autowired
     public MainController(BookDAO bookDAO, CustomerDAO customerDAO) {
@@ -24,11 +24,12 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String showCatalog(@CookieValue(name="login", defaultValue = "NONE") String login,
-                              @CookieValue(name="password", defaultValue = "NONE") String password,
+    public String showCatalog(@CookieValue(name = "customerId", defaultValue = "-1") String customerId,
                               Model model) {
-        model.addAttribute("auth", customerDAO.isAuthenticated(login, password));
-        model.addAttribute("admin", customerDAO.isAdmin(login, password));
+        Optional<Customer> customer = customerDAO.findById(Integer.parseInt(customerId));
+        model.addAttribute("auth", customer.isPresent());
+        model.addAttribute("admin", customer.isPresent() && customer.get().isAdminRights());
+
         return "main";
     }
 }

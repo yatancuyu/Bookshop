@@ -15,6 +15,9 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer>
     @Override
     public Optional<Customer> findByLogin(String login) {
         try (Session session = sessionFactory.openSession()) {
+            if (login == null) {
+                return Optional.empty();
+            }
             Query<Customer> query = session.createQuery(
                     "FROM Customer WHERE login = :param", Customer.class)
                     .setParameter("param", login);
@@ -25,22 +28,12 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer>
         }
     }
 
-    public boolean isAuthenticated(String login, String password) {
+    public boolean Authentification(String login, String password) {
         Optional<Customer> customerOp = findByLogin(login);
         if (customerOp.isEmpty())
             return false;
 
         Customer customer = customerOp.get();
         return customer.getPassword().equals(password);
-    }
-
-    public boolean isAdmin(String login, String password) {
-        Optional<Customer> customerOp = findByLogin(login);
-        if (customerOp.isEmpty())
-            return false;
-
-        Customer customer = customerOp.get();
-        return customer.getPassword().equals(password) &&
-                customer.isAdminRights();
     }
 }

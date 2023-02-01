@@ -2,13 +2,10 @@ package ru.abrosimov.bookshop.dao;
 
 import ru.abrosimov.bookshop.models.Customer;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface CustomerDAO extends GenericDAO<Customer>{
     Optional<Customer> findByLogin(String login);
 
-    boolean isAuthenticated(String login, String password);
-
-    boolean isAdmin(String login, String password);
+    boolean Authentification(String login, String password);
 }

@@ -7,7 +7,11 @@
 
         <ul class="nav nav-pills">
             <li class="nav-item" th:if="${!auth}"><a href="/registration" class="nav-link">Регистрация</a></li>
-            <li class="nav-item" th:if="${!auth}"><a href="#" class="nav-link">Войти</a></li>
+            <li class="nav-item" th:if="${!auth}"><a href="/login" class="nav-link">Войти</a></li>
+            <li class="nav-item" th:if="${auth}"><a href="/logout" class="nav-link">Выйти</a></li>
+            <li class="nav-item" th:if="${auth}"><a href="/customer" class="nav-link">Личный Кабинет</a></li>
+            <li class="nav-item" th:if="${admin}"><a href="/book/create" class="nav-link">Добавить Книгу</a></li>
+            <li class="nav-item" th:if="${admin}"><a href="/order" class="nav-link">Заказы</a></li>
         </ul>
     </div>
 </div>
