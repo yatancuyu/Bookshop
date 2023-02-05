@@ -13,14 +13,12 @@ import java.util.Optional;
 
 @Controller
 public class MainController {
+    @Autowired
+    private BookDAO bookDAO;
 
-    protected BookDAO bookDAO;
-    protected CustomerDAO customerDAO;
+    @Autowired
+    private CustomerDAO customerDAO;
 
-    public MainController(BookDAO bookDAO, CustomerDAO customerDAO) {
-        this.bookDAO = bookDAO;
-        this.customerDAO = customerDAO;
-    }
 
     @GetMapping("/")
     public String showCatalog(@CookieValue(name = "customerId", defaultValue = "-1") String customerId,

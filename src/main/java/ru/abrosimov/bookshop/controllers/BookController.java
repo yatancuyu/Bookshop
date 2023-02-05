@@ -1,6 +1,6 @@
 package ru.abrosimov.bookshop.controllers;
 
-import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +13,11 @@ import java.util.Optional;
 
 @Controller
 public class BookController {
-    private final BookDAO bookDAO;
-    private final CustomerDAO customerDAO;
+    @Autowired
+    private BookDAO bookDAO;
 
-    BookController(BookDAO bookDAO, CustomerDAO customerDAO) {
-        this.bookDAO = bookDAO;
-        this.customerDAO = customerDAO;
-    }
+    @Autowired
+    private CustomerDAO customerDAO;
 
     @GetMapping("/book/{id}")
     public String showBook(@CookieValue(name = "customerId", defaultValue = "-1") String customerId,
@@ -101,14 +99,14 @@ public class BookController {
         return "redirect:/book/" + book.getId();
     }
 
-    private @Nullable String check(String customerId, Integer bookId, Model model) {
+    private String check(String customerId, Integer bookId, Model model) {
         if (checkAdmin(customerId, model) != null || checkBook(bookId, model) != null) {
             return "error";
         }
         return null;
     }
 
-    private @Nullable String checkBook(Integer bookId, Model model) {
+    private String checkBook(Integer bookId, Model model) {
         System.out.println(bookId);
         Optional<Book> book = bookDAO.findById(bookId);
         if (book.isEmpty()) {
@@ -118,7 +116,7 @@ public class BookController {
         return null;
     }
 
-    private @Nullable String checkAdmin(String customerId, Model model) {
+    private String checkAdmin(String customerId, Model model) {
         Optional<Customer> customer = customerDAO.findById(Integer.parseInt(customerId));
         if (customer.isEmpty() || !customer.get().isAdminRights()) {
             model.addAttribute("msg", "Permission denied.");

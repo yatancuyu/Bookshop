@@ -28,12 +28,5 @@ public class CustomerDAOImpl extends GenericDAOImpl<Customer>
         }
     }
 
-    public boolean Authentification(String login, String password) {
-        Optional<Customer> customerOp = findByLogin(login);
-        if (customerOp.isEmpty())
-            return false;
 
-        Customer customer = customerOp.get();
-        return customer.getPassword().equals(password);
-    }
 }

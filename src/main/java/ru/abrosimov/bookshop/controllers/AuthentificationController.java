@@ -12,16 +12,12 @@ import ru.abrosimov.bookshop.models.Customer;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 public class AuthentificationController {
-
-    private final CustomerDAO customerDAO;
-
     @Autowired
-    public AuthentificationController(CustomerDAO customerDAO) {
-        this.customerDAO = customerDAO;
-    }
+    private CustomerDAO customerDAO;
 
     @GetMapping("/registration")
     public String showRegistrationForm(@ModelAttribute("customer") Customer customer) {
@@ -50,7 +46,7 @@ public class AuthentificationController {
     public String logInCustomer(@RequestParam(name = "login") String login,
                                 @RequestParam(name = "password") String password,
                                 HttpServletResponse httpResponse) {
-        if (!customerDAO.Authentification(login, password)) {
+        if (!Authentification(login, password)) {
             return "login";
         }
 
@@ -64,5 +60,14 @@ public class AuthentificationController {
         cookie.setMaxAge(0);
         httpResponse.addCookie(cookie);
         return "redirect:/";
+    }
+
+    public boolean Authentification(String login, String password) {
+        Optional<Customer> customerOp = customerDAO.findByLogin(login);
+        if (customerOp.isEmpty())
+            return false;
+
+        Customer customer = customerOp.get();
+        return customer.getPassword().equals(password);
     }
 }
