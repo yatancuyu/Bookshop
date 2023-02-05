@@ -20,7 +20,7 @@ public class Order implements GenericEntity{
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customerId")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
     private double price;
     private String deliveryAddress;

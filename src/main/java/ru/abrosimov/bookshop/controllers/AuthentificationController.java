@@ -24,11 +24,8 @@ public class AuthentificationController {
     }
 
     @GetMapping("/registration")
-    public String showRegistrationForm(@ModelAttribute("customer") Customer customer,
-                                       Model model) {
-
+    public String showRegistrationForm(@ModelAttribute("customer") Customer customer) {
         return "registration";
-
     }
 
     @PostMapping("/registration")

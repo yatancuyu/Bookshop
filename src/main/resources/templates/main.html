@@ -8,6 +8,12 @@
 <body>
 <header th:insert="blocks/header :: header"></header>
 <main>
+  <h1 style="text-align:center"> Книги </h1>
+  <div th:each="book, iter: ${bookDAO.findAll()}">
+    <a th:href="'/book/' + ${book.getId()}">
+      <span th:text="${book.getName()}"></span>
+    </a>
+  </div>
 
 </main>
 </body>

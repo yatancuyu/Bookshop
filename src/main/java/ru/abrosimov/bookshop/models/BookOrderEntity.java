@@ -18,12 +18,12 @@ public class BookOrderEntity implements GenericEntity, Serializable {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "bookid", referencedColumnName = "id")
+    @JoinColumn(name = "book_id", referencedColumnName = "id")
     private Book book;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "orderid", referencedColumnName = "id")
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
     private Order order;
 
     private int amount;

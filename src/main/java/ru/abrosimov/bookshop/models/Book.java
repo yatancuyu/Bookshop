@@ -21,26 +21,24 @@ public class Book implements GenericEntity {
     private String authors;
     private String genre;
     private String publisher;
-    private int yearOfPublication;
-    private int numberOfPages;
-    private String pathToCover;
-    private int amount;
-    private double price;
+    private Integer yearOfPublication;
+    private Integer numberOfPages;
+    private Integer amount;
+    private Double price;
 
     @OneToMany(mappedBy = "book")
     @ToString.Exclude
     private Set<BookOrderEntity> orders = new HashSet<>();
 
     public Book(String name, String authors, String genre, String publisher,
-                int yearOfPublication, int numberOfPages, String pathToCover,
-                int amount, double price) {
+                Integer yearOfPublication, Integer numberOfPages,
+                Integer amount, Double price) {
         this.name = name;
         this.authors = authors;
         this.genre = genre;
         this.publisher = publisher;
         this.yearOfPublication = yearOfPublication;
         this.numberOfPages = numberOfPages;
-        this.pathToCover = pathToCover;
         this.amount = amount;
         this.price = price;
     }
@@ -50,14 +48,13 @@ public class Book implements GenericEntity {
         if (this == o) return true;
         if (!(o instanceof Book)) return false;
         Book book = (Book) o;
-        return yearOfPublication == book.yearOfPublication &&
-                numberOfPages == book.numberOfPages &&
-                amount == book.amount &&
+        return Objects.equals(yearOfPublication, book.yearOfPublication) &&
+                Objects.equals(numberOfPages, book.numberOfPages) &&
+                Objects.equals(amount, book.amount) &&
                 Double.compare(book.price, price) == 0 &&
                 Objects.equals(name, book.name) &&
                 Objects.equals(authors, book.authors) &&
                 Objects.equals(genre, book.genre) &&
-                Objects.equals(publisher, book.publisher) &&
-                Objects.equals(pathToCover, book.pathToCover);
+                Objects.equals(publisher, book.publisher);
     }
 }

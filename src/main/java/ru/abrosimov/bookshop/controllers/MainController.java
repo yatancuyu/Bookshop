@@ -17,7 +17,6 @@ public class MainController {
     protected BookDAO bookDAO;
     protected CustomerDAO customerDAO;
 
-    @Autowired
     public MainController(BookDAO bookDAO, CustomerDAO customerDAO) {
         this.bookDAO = bookDAO;
         this.customerDAO = customerDAO;
@@ -29,7 +28,7 @@ public class MainController {
         Optional<Customer> customer = customerDAO.findById(Integer.parseInt(customerId));
         model.addAttribute("auth", customer.isPresent());
         model.addAttribute("admin", customer.isPresent() && customer.get().isAdminRights());
-
+        model.addAttribute("bookDAO", bookDAO);
         return "main";
     }
 }
