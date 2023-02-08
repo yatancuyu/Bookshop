@@ -85,9 +85,9 @@
     </div>
     <hr>
     <h1 style="align-self: center">Заказы</h1>
-    <div th:each="book, iter: ${orderDAO.findForCustomer(customer)}">
+    <div th:each="order: ${orderDAO.findForCustomer(customer)}">
         <a th:href="'/order/' + ${order.getId()}">
-            <span th:text="Заказ №${order.getId()}"></span>
+            <span th:text="'Заказ №' + ${order.getId()}"></span>
         </a>
     </div>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Bookshop</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -24,8 +24,15 @@
     <!--edit delete order button group-->
     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group mr-2" role="group" aria-label="First group">
-            <form th:if="${auth}" style="margin-right: 30px" method="get" action="/book/order">
+            <form th:if="${auth}" style="margin-right: 30px" method="post" action="/order/book">
                 <input type="hidden" name="bookId" th:value="${book.getId()}"/>
+                <label for="orders">Выберите заказ:</label>
+                <select id="orders" name="orderId">
+                    <option th:value="0">Новый заказ</option>
+                    <option th:each="order: ${orderDAO.findForCustomer(customer)}" th:value="${order.getId()}"
+                    th:text="'Заказ №' + ${order.getId()}">
+
+                </select>
                 <button id="orderButton" type="submit" class="btn btn-secondary">Заказать книгу</button>
             </form>
             <form th:if="${admin}" method="get" action="/book/edit">
@@ -41,7 +48,6 @@
     <!--end of button group-->
 
 </div>
-
 </main>
 </body>
 </html>

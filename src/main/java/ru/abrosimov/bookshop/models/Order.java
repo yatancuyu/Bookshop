@@ -1,6 +1,7 @@
 package ru.abrosimov.bookshop.models;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,8 +23,9 @@ public class Order implements GenericEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
-    private double price;
+    private Double price;
     private String deliveryAddress;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date datetimeOfDelivery;
 
     @Enumerated(EnumType.ORDINAL)
@@ -35,18 +37,13 @@ public class Order implements GenericEntity{
 
     public enum Status {
         OPEN,
-        PROCESSING,
-        INTRANSIT,
-        DELIVERED;
+        CLOSED
     }
 
-    public Order(Customer customer, double price, String deliveryAddress,
-                 Date datetimeOfDelivery, Status status) {
+    public Order(Customer customer, double price) {
         this.customer = customer;
         this.price = price;
-        this.deliveryAddress = deliveryAddress;
-        this.datetimeOfDelivery = datetimeOfDelivery;
-        this.status = status;
+        this.status = Status.OPEN;
     }
 
     @Override

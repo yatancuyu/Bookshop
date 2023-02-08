@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.abrosimov.bookshop.dao.BookDAO;
 import ru.abrosimov.bookshop.dao.CustomerDAO;
+import ru.abrosimov.bookshop.dao.OrderDAO;
 import ru.abrosimov.bookshop.models.Book;
 import ru.abrosimov.bookshop.models.Customer;
 
@@ -19,12 +20,16 @@ public class BookController {
     @Autowired
     private CustomerDAO customerDAO;
 
+    @Autowired
+    private OrderDAO orderDAO;
+
     @GetMapping("/book/{id}")
     public String showBook(@CookieValue(name = "customerId", defaultValue = "-1") String customerId,
                            @PathVariable("id") Integer bookId,
                            Model model) {
         Optional<Customer> customer = customerDAO.findById(Integer.parseInt(customerId));
         model.addAttribute("auth", customer.isPresent());
+        model.addAttribute("customer", customer.orElse(null));
         model.addAttribute("admin", customer.isPresent() && customer.get().isAdminRights());
 
         String err = checkBook(bookId, model);
@@ -33,6 +38,7 @@ public class BookController {
         }
 
         model.addAttribute("book", bookDAO.findById(bookId).get());
+        model.addAttribute("orderDAO", orderDAO);
         return "book";
     }
 

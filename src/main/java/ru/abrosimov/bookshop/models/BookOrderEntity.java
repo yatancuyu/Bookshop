@@ -14,19 +14,29 @@ import java.io.Serializable;
 public class BookOrderEntity implements GenericEntity, Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
     @JoinColumn(name = "book_id", referencedColumnName = "id")
+    @NonNull
+    @ToString.Exclude
     private Book book;
 
-    @Id
+
     @ManyToOne
     @JoinColumn(name = "order_id", referencedColumnName = "id")
+    @NonNull
+    @ToString.Exclude
     private Order order;
 
     private int amount;
+
+    public BookOrderEntity(Book book, Order order, int amount) {
+        this.book = book;
+        this.order = order;
+        this.amount = amount;
+    }
 
     @Override
     public boolean equals(Object o) {

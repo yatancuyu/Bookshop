@@ -11,7 +11,7 @@
             <li class="nav-item" th:if="${auth}"><a href="/logout" class="nav-link">Выйти</a></li>
             <li class="nav-item" th:if="${auth}"><a href="/customer" class="nav-link">Личный Кабинет</a></li>
             <li class="nav-item" th:if="${admin}"><a href="/book/create" class="nav-link">Добавить Книгу</a></li>
-            <li class="nav-item" th:if="${admin}"><a href="/order" class="nav-link">Заказы</a></li>
+            <li class="nav-item" th:if="${admin}"><a href="/order/all" class="nav-link">Заказы</a></li>
         </ul>
     </div>
 </div>

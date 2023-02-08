@@ -8,6 +8,34 @@
 <body>
 <header th:insert="blocks/header :: header"></header>
 <main>
+  <h1 style="text-align:center"> Поиск </h1>
+  <div class="text-center">
+    <form method="get" action="/search">
+      <p>Выполнить поиск по: </p>
+      <div>
+        <input type="radio" id="contactChoice1"
+               name="filter" value=1>
+        <label for="contactChoice1">Жанр</label>
+
+        <input type="radio" id="contactChoice2"
+               name="filter" value=2>
+        <label for="contactChoice2">Название</label>
+
+        <input type="radio" id="contactChoice3"
+               name="filter" value=3>
+        <label for="contactChoice3">Автор</label>
+
+        <input type="radio" id="contactChoice4"
+               name="filter" value=4>
+        <label for="contactChoice4">Год издания</label>
+        <input type="text" id="line"
+               name="request">
+      </div>
+      <div>
+        <button type="submit">Поиск</button>
+      </div>
+    </form>
+  </div>
   <h1 style="text-align:center"> Книги </h1>
   <div th:each="book, iter: ${bookDAO.findAll()}">
     <a th:href="'/book/' + ${book.getId()}">
