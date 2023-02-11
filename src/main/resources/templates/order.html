@@ -15,8 +15,8 @@
         </a>
     </div>
     <hr>
-    <h4 th:if="${order.getStatus().equals(openStatus)}" th:text="'Статус заказа: Открыт.'"></h4>
-    <h4 th:if="${!order.getStatus().equals(openStatus)}" th:text="'Статус заказа: Закрыт.'"></h4>
+    <h4 th:if="${order.getStatus().value}" th:text="'Статус заказа: Открыт.'"></h4>
+    <h4 th:if="${!order.getStatus().value}" th:text="'Статус заказа: Закрыт.'"></h4>
     <h1 th:text="'ИТОГО:' + ${order.getPrice()}"></h1>
     <form th:if="${ableToCheckout && order.getStatus() == openStatus}" method="get" action="/order/checkout">
         <input type="hidden" name="orderId" th:value="${order.getId()}"/>

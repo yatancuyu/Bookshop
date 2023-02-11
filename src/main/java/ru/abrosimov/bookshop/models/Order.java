@@ -36,8 +36,12 @@ public class Order implements GenericEntity{
     private Set<BookOrderEntity> books = new HashSet<>();
 
     public enum Status {
-        OPEN,
-        CLOSED
+        OPEN(true), CLOSED(false);
+
+        public final boolean value;
+        Status(boolean value) {
+            this.value = value;
+        }
     }
 
     public Order(Customer customer, double price) {

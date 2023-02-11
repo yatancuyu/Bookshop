@@ -29,7 +29,7 @@
                 <label for="orders">Выберите заказ:</label>
                 <select id="orders" name="orderId">
                     <option th:value="0">Новый заказ</option>
-                    <option th:each="order: ${orderDAO.findForCustomer(customer)}" th:value="${order.getId()}"
+                    <option th:each="order: ${orderDAO.findForCustomer(customer)}" th:if="${order.getStatus().value}" th:value="${order.getId()}"
                     th:text="'Заказ №' + ${order.getId()}">
 
                 </select>

@@ -42,7 +42,6 @@ public class OrderController {
         model.addAttribute("auth", customer.isPresent());
         model.addAttribute("admin", customer.isPresent() && customer.get().isAdminRights());
         model.addAttribute("order", order.get());
-        model.addAttribute("openStatus", Order.Status.OPEN);
         return "order";
     }
 
