@@ -44,10 +44,10 @@ public class OrderController {
         model.addAttribute("order", order.get());
         return "order";
     }
-
     @GetMapping("/order/checkout")
-    public String showOrderCheckoutConfirmation(@RequestParam("orderId") Integer orderId, Model model) {
-        model.addAttribute(orderDAO.findById(orderId).get());
+    public String showOrderCheckoutForm(@RequestParam("orderId") Integer orderId, Model model) {
+        Optional<Order> order = orderDAO.findById(orderId);
+        model.addAttribute("order", order.get());
         return "orderCheckout";
     }
 

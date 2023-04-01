@@ -20,6 +20,7 @@ import java.util.Objects;
 public class Customer implements GenericEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     private int id;
 
     @NotEmpty(message = "Поле Имя должно быть заполнено.")
